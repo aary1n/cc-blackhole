@@ -3,8 +3,9 @@ import type { Register, ThemeSetArgs } from 'claude-code'
 import { frame } from './frame.js'
 import { makeColors } from './make-colors.js'
 
-// false: show blackhole.png, the still frame, instead of the animation.
-const ANIMATE = true
+// true: redraw the animation ten times a second. Off: the desktop app blanks the
+// backdrop between redraws, which flickers. false shows blackhole.png, the still frame.
+const ANIMATE = false
 // The app redraws a mod's drawing ten times a second at most.
 const FRAME_MS = 100
 
@@ -46,8 +47,8 @@ export const register: Register = on => {
     if (!set.isDrawn) {
       $.ui.status(set.reason)
     }
+    startedAt = await $.clock.now()
     if (ANIMATE) {
-      startedAt = await $.clock.now()
       $.clock.every(FRAME_MS, () => $.ui.invalidate('ui.render'))
     }
 
