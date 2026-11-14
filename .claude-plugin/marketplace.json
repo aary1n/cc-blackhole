@@ -1,0 +1,5 @@
+{
+  "name": "cc-blackhole",
+  "owner": { "name": "aary1n" },
+  "plugins": [{ "name": "ascii-black-hole", "source": "./" }]
+}
